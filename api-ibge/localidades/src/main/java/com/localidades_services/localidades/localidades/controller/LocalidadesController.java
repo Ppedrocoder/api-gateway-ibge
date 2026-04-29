@@ -1,5 +1,12 @@
 package com.localidades_services.localidades.localidades.controller;
 
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import lombok.RequiredArgsConstructor;
+import com.localidades_services.localidades.localidades.service.LocalidadesService;
+import java.util.List;
+
 @RestController
 @RequestMapping("/estados")
 @RequiredArgsConstructor

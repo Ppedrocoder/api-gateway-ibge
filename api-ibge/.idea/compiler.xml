@@ -9,7 +9,7 @@
         <module name="eurekaserver" />
         <module name="ibgegateway" />
       </profile>
-      <profile name="Annotation profile for localidades" enabled="true">
+      <profile name="Annotation profile for noticias" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
