@@ -6,7 +6,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.noticias_services.noticias.noticias.web.dto.NoticiasResponseDTO;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import reactor.core.publisher.Mono;
@@ -22,18 +21,18 @@ public class NoticiasService {
 
     @Cacheable("noticias")
     @CircuitBreaker(name="ibgeNoticias", fallbackMethod="fallbackNoticias")
-    public Mono<NoticiasResponseDTO> buscarNoticias() {
+    public Mono<Object> buscarNoticias() {
         return webClient.get()
                 .uri("/noticias/?qtd=10")
                 .retrieve()
-                .bodyToMono(NoticiasResponseDTO.class)
-                .timeout(Duration.ofSeconds(5))
+                .bodyToMono(Object.class)
+                .timeout(Duration.ofSeconds(2))
                 .onErrorResume(ex -> Mono.error(
                         new RuntimeException("Erro ao consumir API do IBGE", ex)
                 ));
     }
 
-    public Mono<NoticiasResponseDTO> fallbackNoticias(Exception ex) {
-    return Mono.just(new NoticiasResponseDTO());
+    public Mono<Object> fallbackNoticias(Exception ex) {
+    return Mono.just(new Object());
 }
 }
