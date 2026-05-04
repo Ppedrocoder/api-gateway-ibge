@@ -22,10 +22,9 @@ public class NoticiasController {
 
     @GetMapping
     public ResponseEntity<Object> getNoticias(
-            @RequestParam(defaultValue = "Brasil") String q,
             @RequestParam(defaultValue = "30") int qtd) {
         try {
-            String url = IBGE_API + "?q=" + q + "&qtd=" + qtd;
+            String url = IBGE_API + "?qtd=" + qtd;
             Map<String, Object> response = restTemplate.getForObject(url, Map.class);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -40,7 +39,7 @@ public class NoticiasController {
             @RequestParam String termo,
             @RequestParam(defaultValue = "10") int qtd) {
         try {
-            String url = IBGE_API + "?q=" + termo + "&qtd=" + qtd;
+            String url = IBGE_API + "?busca=" + termo + "&qtd=" + qtd;
             Map<String, Object> response = restTemplate.getForObject(url, Map.class);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
